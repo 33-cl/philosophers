@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: debian <debian@student.42.fr>              +#+  +:+       +#+         #
+#    By: maeferre <maeferre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/17 12:55:56 by qordoux           #+#    #+#              #
-#    Updated: 2024/07/09 03:06:15 by debian           ###   ########.fr        #
+#    Updated: 2024/07/21 00:19:40 by maeferre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := philosophers
-CFLAGS := 
+CFLAGS := -Wall -Werror -Wextra -g
 BUILD_DIR := .build
 LIBFT := ./libft
 LIBS := ./libft/libft.a
@@ -25,7 +25,7 @@ all: $(LIBFT) $(NAME)
 $(BUILD_DIR):
 	@mkdir -p $(BUILD_DIR)
 
-$(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
+$(BUILD_DIR)/%.o: %.c philosophers.h | $(BUILD_DIR)
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
