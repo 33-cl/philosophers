@@ -6,7 +6,7 @@
 /*   By: maeferre <maeferre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 16:13:29 by debian            #+#    #+#             */
-/*   Updated: 2024/07/21 00:41:25 by maeferre         ###   ########.fr       */
+/*   Updated: 2024/07/23 15:42:28 by maeferre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ t_philo	*create_philo(t_data *data, int id)
 		return (NULL);
 	new_philo->id = id;
 	new_philo->thread = 0;
-	new_philo->meals_to_eat = data->target;
+	new_philo->meals = data->target;
+	new_philo->right_fork = true;
 	new_philo->state = THINKING;
 	new_philo->prev = NULL;
 	new_philo->next = NULL;
@@ -74,6 +75,7 @@ t_philo	*init_philo_forks(t_data *data, t_philo *philos)
 	start = philos;
 	while (i++, i < data->nb_philo)
 	{
+		philos->m_left_fork = &(philos->prev->m_right_fork);
 		philos->left_fork = &(philos->prev->right_fork);
 		philos = philos->next;
 	}
@@ -84,7 +86,8 @@ bool	init_data(t_data *data, t_philo **philos, int argc, char **argv)
 {
 	if (argc < 5 || argc > 6)
 		return (false);
-	
+	data->print = true;
+	data->time_at_start = get_time();
 	data->nb_philo = atoi(argv[1]);
 	data->time_to_die = atoi(argv[2]);
 	data->time_to_eat = atoi(argv[3]);

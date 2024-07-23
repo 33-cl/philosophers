@@ -6,7 +6,7 @@
 /*   By: maeferre <maeferre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 16:17:54 by debian            #+#    #+#             */
-/*   Updated: 2024/07/21 00:52:20 by maeferre         ###   ########.fr       */
+/*   Updated: 2024/07/23 13:35:27 by maeferre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int main(int argc, char **argv)
 
 	if (!init_data(&data, &philos, argc, argv))
 		return (printf("Invalid args\n"), 1);
-	print_philo(philos);
-	launch_processes(data, philos);
+	// print_philo(philos);
+	launch_processes(&data, philos);
 	// if (!launch_processes(data, philos))
 	//     return (free_data(philos), 1);
 	// free_data(philos);
@@ -46,9 +46,11 @@ void print_philo(t_philo *head)
 	do
 	{
 		printf("Philosopher %d\n", current->id);
+		printf("  Mutex Left  fork = %p\n", current->m_left_fork);
+		printf("  Mutex Right fork = %p\n", &current->m_right_fork);
 		printf("  Left  fork = %p\n", current->left_fork);
 		printf("  Right fork = %p\n", &current->right_fork);
-		printf("  Number of Meals to eat: %d\n", current->meals_to_eat);
+		printf("  Number of Meals to eat: %d\n", current->meals);
 		printf("  State: %d\n", current->state);
 		printf("  Previous Philosopher: %d\n", current->prev ? current->prev->id : -1);
 		printf("  Next Philosopher: %d\n\n", current->next ? current->next->id : -1);
