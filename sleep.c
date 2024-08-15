@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sleep.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maeferre <maeferre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 16:17:54 by debian            #+#    #+#             */
-/*   Updated: 2024/08/15 21:13:28 by maeferre         ###   ########.fr       */
+/*   Created: 2024/08/15 20:37:39 by maeferre          #+#    #+#             */
+/*   Updated: 2024/08/15 20:47:39 by maeferre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	main(int argc, char **argv)
+bool	sleeping(t_philo *philo)
 {
-	t_data		data;
-	t_philo		*philos;
-
-	if (!init_data(&data, &philos, argc, argv))
-		return (printf("Invalid args\n"), 1);
-	launch_processes(&data, philos);
-	free_data(philos);
-	return (0);
+	if (check_death(philo))
+		return (false);
+	print_state(philo, SLEEPING);
+	usleep(philo->data->time_to_sleep * 1000);
+	return (true);
 }

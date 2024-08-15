@@ -6,16 +6,16 @@
 #    By: maeferre <maeferre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/17 12:55:56 by qordoux           #+#    #+#              #
-#    Updated: 2024/07/21 00:19:40 by maeferre         ###   ########.fr        #
+#    Updated: 2024/08/15 20:37:26 by maeferre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := philosophers
-CFLAGS := -Wall -Werror -Wextra -g
+NAME := philo
+CFLAGS := -Wall -Werror -Wextra
 BUILD_DIR := .build
 LIBFT := ./libft
 LIBS := ./libft/libft.a
-SRC := $(wildcard *.c)
+SRC := eat.c free.c init.c main.c think.c threads.c utils.c sleep.c
 OBJ := $(SRC:%.c=$(BUILD_DIR)/%.o)
 DEP := $(SRC:%.c=$(BUILD_DIR)/%.d)
 CC := cc
@@ -30,7 +30,7 @@ $(BUILD_DIR)/%.o: %.c philosophers.h | $(BUILD_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(LIBS) $(OBJ)
-	$(CC) $(OBJ) $(LIBS) $(CFLAGS) -lreadline -o $(NAME)
+	$(CC) $(OBJ) $(LIBS) $(CFLAGS) -o $(NAME)
 	@echo "\033[1;32mPhilo Created!\n"
 
 $(LIBFT)/libft.a : FORCE
